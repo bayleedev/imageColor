@@ -1,0 +1,28 @@
+{
+    "name": "blainesch/imageColor",
+    "description": "Will group pictures into given color categories.",
+    "keywords": ["color", "colors", "category", "picture", "photo"],
+    "homepage": "https://github.com/BlaineSch/imageColor",
+    "license": "The BSD License",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Blaine Schmeisser",
+            "email": "BlaineSch@gmail.com",
+            "homepage": "https://github.com/BlaineSch"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "imageColor": "src/",
+            "imageColorTest": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.10",
+        "mischiefcollective/colorjizz": "dev-master"
+    },
+    "require-dev": {
+         "mikey179/vfsStream": "v1.1.0"
+    }
+}
