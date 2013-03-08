@@ -98,8 +98,8 @@ class Color
         $min = 9999;
         $bestColor = null;
         static::updateColors();
-        foreach (static::$_colors as $key => $sibling) {
-            $tmin = $color->distance($sibling);
+        foreach (static::$_colors as $key => $value) {
+            $tmin = $color->distance($value);
             if ($min > $tmin) {
                 $bestColor = $key;
                 $min = $tmin;
@@ -116,15 +116,32 @@ class Color
      */
     protected static function updateColors()
     {
-        if (is_object(static::$_colors['black'])) {
+        $keys = array_keys(static::$_colors);
+        if (is_object(static::$_colors[$keys[0]])) {
             return;
         }
-        foreach (static::$_colors as $color => $hex) {
-            static::$_colors[$color] = new Hex($hex);
+        foreach (static::$_colors as $color => $value) {
+            static::$_colors[$color] = new Hex($value);
             static::$_colors[$color] = static::$_colors[$color]->toCIELab();
         }
 
         return;
+    }
+
+    /**
+     * Will return the current colors, which can be overwritten with this method.
+     *
+     * @param  array  $colors
+     * @return array
+     */
+    public static function colors(array $colors = null)
+    {
+        if (!is_null($colors)) {
+            static::$_colors = $colors;
+        }
+        static::updateColors();
+
+        return static::$_colors;
     }
 
 }

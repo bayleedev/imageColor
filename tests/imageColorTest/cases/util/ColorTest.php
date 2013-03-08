@@ -8,6 +8,14 @@ use imageColorTest\Unit;
 
 class ColorTest extends Unit
 {
+    public function setUp() {
+        $this->colors = Color::colors();
+    }
+
+    public function tearDown() {
+        Color::colors($this->colors);
+    }
+
     public function testColorAtReturnsCorrectObject()
     {
         $img = imagecreate(1, 1);
@@ -61,6 +69,23 @@ class ColorTest extends Unit
         $bestColor = Color::bestColor($color);
 
         $this->assertSame('black', $bestColor);
+    }
+
+    public function testRetrieveColors()
+    {
+        $this->assertInternalType('array', Color::colors());
+        $this->assertNotCount(0, Color::colors());
+    }
+
+    public function testOverwriteColors()
+    {
+        $newColors = array(
+            'black' => 0x000000,
+            'white' => 0xFFFFFF,
+        );
+
+        $this->assertCount(2, Color::colors($newColors));
+        $this->assertCount(2, Color::colors());
     }
 
 }
