@@ -15,7 +15,7 @@ cd imageColor && php composer.phar install
 ### Composer
 ~~~ json
 "require": {
-    "blainesch/imageColor": "1.0.0"
+    "blainesch/imagecolor": "1.0.0"
 }
 ~~~
 ~~~ bash
