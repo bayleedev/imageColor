@@ -13,7 +13,6 @@ class Color
      *
      * These will be convted to the Color model at runtime.
      *
-     * @link https://github.com/humanmade/Colors-Of-Image
      * @var  array
      */
     protected static $_colors = array(
