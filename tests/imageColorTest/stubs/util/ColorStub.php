@@ -27,4 +27,13 @@ class ColorStub extends Color
         return parent::bestColor($color, $options);
     }
 
+    public static function colors(array $color = null)
+    {
+        if (isset(static::$data['colors'])) {
+            return call_user_func(static::$data['colors'], $color);
+        }
+
+        return parent::colors($color);
+    }
+
 }

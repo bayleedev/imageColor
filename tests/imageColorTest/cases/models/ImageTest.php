@@ -7,6 +7,7 @@ use imageColor\models\Image;
 use imageColorTest\stubs\util\ColorStub;
 use imageColorTest\stubs\ColorJizzStub;
 use imageColorTest\Unit;
+use stdClass;
 
 class ImageTest extends Unit
 {
@@ -155,11 +156,21 @@ class ImageTest extends Unit
 
     public function testIsWithDarkImage()
     {
-        $image = new Image();
+        $image = new Image(array(
+            'classes' => array(
+                'color' => 'imageColorTest\stubs\util\ColorStub',
+            ),
+        ));
         $image->primaryColors = array(
-            'black' => 10,
-            'white' => 0,
+            'red' => 10,
         );
+        ColorStub::$data['colors'] = function() {
+            return array(
+                'red' => (object) array(
+                    'lightness' => 40,
+                ),
+            );
+        };
 
         $this->assertTrue($image->is('black'));
         $this->assertTrue($image->is('dark'));
@@ -169,16 +180,58 @@ class ImageTest extends Unit
 
     public function testIsWithLightImage()
     {
-        $image = new Image();
+        $image = new Image(array(
+            'classes' => array(
+                'color' => 'imageColorTest\stubs\util\ColorStub',
+            ),
+        ));
         $image->primaryColors = array(
-            'black' => 0,
-            'white' => 10,
+            'red' => 10,
         );
+        ColorStub::$data['colors'] = function() {
+            return array(
+                'red' => (object) array(
+                    'lightness' => 80,
+                ),
+            );
+        };
 
         $this->assertFalse($image->is('black'));
         $this->assertFalse($image->is('dark'));
         $this->assertTrue($image->is('white'));
         $this->assertTrue($image->is('light'));
+    }
+
+    public function testIsWithLightImageComplex()
+    {
+        $image = new Image(array(
+            'classes' => array(
+                'color' => 'imageColorTest\stubs\util\ColorStub',
+            ),
+        ));
+        $image->primaryColors = array(
+            'red' => 20,
+            'yellow' => 30,
+            'blue' => 30,
+        );
+        ColorStub::$data['colors'] = function() {
+            return array(
+                'red' => (object) array(
+                    'lightness' => 80,
+                ),
+                'yellow' => (object) array(
+                    'lightness' => 20,
+                ),
+                'blue' => (object) array(
+                    'lightness' => 0,
+                ),
+            );
+        };
+
+        $this->assertTrue($image->is('black'));
+        $this->assertTrue($image->is('dark'));
+        $this->assertFalse($image->is('white'));
+        $this->assertFalse($image->is('light'));
     }
 
     public function testReturnsSpecificPrimaryColors()

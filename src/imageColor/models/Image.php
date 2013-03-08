@@ -192,14 +192,18 @@ class Image extends Object
      */
     public function is($flag)
     {
-        $primaryColors = $this->primaryColors();
+        $color = $this->_classes['color'];
         switch ($flag) {
             case 'dark':
             case 'black':
-                $black = isset($primaryColors['black']) ? $primaryColors['black'] : 0;
-                $white = isset($primaryColors['white']) ? $primaryColors['white'] : 0;
-
-                return $black > $white;
+                $primaryColors = $this->primaryColors();
+                $colors = $color::colors();
+                $totalColors = array_sum($primaryColors);
+                $totalLightness = 0;
+                foreach ($primaryColors as $colorKey => $count) {
+                    $totalLightness += $count * ($colors[$colorKey]->lightness);
+                }
+                return ($totalLightness / $totalColors) < 50;
             case 'light':
             case 'white':
                 return !$this->is('dark');
