@@ -131,7 +131,7 @@ class Color
     /**
      * Will return the current colors, which can be overwritten with this method.
      *
-     * @param  array  $colors
+     * @param  array $colors
      * @return array
      */
     public static function colors(array $colors = null)

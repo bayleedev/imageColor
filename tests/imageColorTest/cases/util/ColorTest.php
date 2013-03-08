@@ -8,11 +8,13 @@ use imageColorTest\Unit;
 
 class ColorTest extends Unit
 {
-    public function setUp() {
+    public function setUp()
+    {
         $this->colors = Color::colors();
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         Color::colors($this->colors);
     }
 

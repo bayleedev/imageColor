@@ -7,7 +7,6 @@ use imageColor\models\Image;
 use imageColorTest\stubs\util\ColorStub;
 use imageColorTest\stubs\ColorJizzStub;
 use imageColorTest\Unit;
-use stdClass;
 
 class ImageTest extends Unit
 {

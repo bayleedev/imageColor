@@ -27,7 +27,7 @@ abstract class Object
     /**
      * Will update the configurable options.
      *
-     * @param array $options Overwrite the default values listed in autoConfig.
+     * @param  array $options Overwrite the default values listed in autoConfig.
      * @return void
      */
     public function autoConfig($options)

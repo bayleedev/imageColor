@@ -203,6 +203,7 @@ class Image extends Object
                 foreach ($primaryColors as $colorKey => $count) {
                     $totalLightness += $count * ($colors[$colorKey]->lightness);
                 }
+
                 return ($totalLightness / $totalColors) < 50;
             case 'light':
             case 'white':
